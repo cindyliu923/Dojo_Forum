@@ -9,6 +9,38 @@
   </head>
 
   <body>
+
+  <% if current_user %>
+    Hi, <%= current_user.email %>
+      <%= link_to('Log out', destroy_user_session_path, method: :delete) %> |
+      <!-- <%= link_to('修改密碼', edit_user_registration_path) %> -->
+    <% else %>
+      <%= link_to('Sign up', new_user_registration_path) %> |
+      <%= link_to('Log in', new_user_session_path) %>
+  <% end %>
+
+    <% if flash[:notice] %>
+    <div class="container">
+      <div class="row">
+        <div class="alert alert-success alert-dismissible alert-fixed">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <%= notice %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+    <div class="container">
+      <div class="row">
+        <div class="alert alert-danger alert-dismissible alert-fixed">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <%= alert %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
