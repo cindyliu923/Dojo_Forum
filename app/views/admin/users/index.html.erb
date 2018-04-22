@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <%= link_to 'Category List', admin_categories_path, class: "btn btn-default btn-xs" %> |
+        <%= link_to 'User List', admin_users_path, class: "btn btn-default btn-xs" %>
+      </div>
+        <br>
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr class="active">
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr class="warning">
+            <th scope="row"><%= user.name %></th>
+            <td><%= user.email %></td>
+            <td><%= form_tag admin_user_path(user), :method => :patch do %>
+                  <%= select_tag :role, options_for_select([["Admin",'admin'],["Normal",'normal']],user.role) %>
+                  <%= submit_tag 'Update' %>
+                <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
