@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   root "posts#index"
 
   namespace :admin do
+    resources :users, only: [:index, :update]
+    resources :categories
     root "posts#index"
   end
 
