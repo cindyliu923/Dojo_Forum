@@ -16,9 +16,22 @@
           <%= image_tag @post.image, width: '300px' if @post.image? %>
           <%= f.file_field :image %>
         </div>
-          <div class="form-group">
-            <%= f.submit "Submit" %>
-          </div>
+        Who Can See：
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :permit, "all", class: "form-check-input" %>
+          <label class="form-check-label">All</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :permit, "friend", class: "form-check-input" %>
+          <label class="form-check-label">Friend</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :permit, "myself", class: "form-check-input"  %>
+          <label class="form-check-label">Myself</label>
+        </div>     
+        <div class="form-group">
+          <%= f.submit "Submit" %>
+        </div>
       <% end %>
 
 
