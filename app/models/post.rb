@@ -3,4 +3,5 @@ class Post < ApplicationRecord
 
   has_many :replies, dependent: :destroy
 
+  has_many :vieweds, dependent: :destroy
 end
