@@ -4,8 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :replies, dependent: :restrict_with_error
+  has_many :posts, through: :replies
+
   def admin?
     self.role == "admin"
   end
-  
+
 end
