@@ -2,8 +2,10 @@ class Post < ApplicationRecord
   validates_inclusion_of :status, :in => ["publish", "draft"]
   validates_inclusion_of :permit, :in => ["all", "friend", "myself"]
 
-  belongs_to :category
   belongs_to :user
+
+  has_many :category_of_posts, dependent: :destroy
+  has_many :categories, through: :category_of_posts
 
   has_many :replies, dependent: :destroy
 
