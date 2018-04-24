@@ -3,8 +3,6 @@
     <div class="admin-head col-md-12">
       <div class="head-title p-5">
       </div>
-
-
       <%= form_for @post do |f| %>
         <div class="form-group">
           <%= f.text_field :title, placeholder: "Title", class: "form-control" %>
@@ -28,15 +26,24 @@
         <div class="form-check form-check-inline">
           <%= f.radio_button :permit, "myself", class: "form-check-input"  %>
           <label class="form-check-label">Myself</label>
-        </div>     
+        </div> 
+        <br/>
+        Category：
+        <% @categories.each do |category| %>
+          <%= fields_for 'categories[]', category do |f| %>
+          <div class="form-check form-check-inline">
+            <%= f.check_box :category_of_post_ids %>
+            <label class="form-check-label"><%= category.name %></label>
+          </div>
+          <% end %>
+        <% end %>
+        <br/> 
+        Status：   
         <div class="form-group">
+          <%= f.submit "Save Draft" %>
           <%= f.submit "Submit" %>
         </div>
       <% end %>
-
-
-
-
     </div>
   </div>
 </div>
