@@ -23,8 +23,10 @@
         <tr>
           <th scope="row"><%= post.replies_count %></th>
           <td><%= post.title %></td>
-          <td><%= post.replies.last.created_at %></td>
-          <td<%= post.vieweds_count %></td>
+          <td><% if post.replies.present? %>
+                <%= post.replies.last.created_at %>
+              <% end %></td>
+          <td><%= post.viewed_count %></td>
         </tr>
         <% end %>
       </tbody>
