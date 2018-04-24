@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get :feeds
     end
   end
+  resources :categories, only: :show
   root "posts#index"
 
   namespace :admin do
