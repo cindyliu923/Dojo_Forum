@@ -9,6 +9,14 @@
 <div class="container">
   <div class="row">
 
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item"><%= link_to "All", root_path, class: "nav-link active" %></li>
+        <% @categories.each do |category| %>
+          <li class="nav-item"><%= link_to category.name, category_path(category), class: "nav-link" %></li>
+        <% end %>
+    </ul>  
+    <br>
+
     <table class="table table-hover">
       <thead>
         <tr>

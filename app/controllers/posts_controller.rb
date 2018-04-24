@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all_publish
+    @categories = Category.all
   end
 
   def new
