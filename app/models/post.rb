@@ -13,6 +13,9 @@ class Post < ApplicationRecord
 
   has_many :vieweds, dependent: :destroy
 
+  has_many :collects, dependent: :destroy
+  has_many :collected_users, through: :collects, source: :user
+
   def self.all_publish 
     where( :status => 'publish', :permit => 'all' ).all
   end

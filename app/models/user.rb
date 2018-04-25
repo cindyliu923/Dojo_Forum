@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
+  has_many :collects, dependent: :destroy
+  has_many :collected_posts, through: :collects, source: :post
+
   def admin?
     self.role == "admin"
   end
