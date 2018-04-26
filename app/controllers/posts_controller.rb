@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
-    @posts = Post.all_publish.page(params[:page]).per(20)
+    @posts = Post.all_publish.includes(:replies).order(sort_by).page(params[:page]).per(20)
     @categories = Category.all
   end
 
@@ -47,6 +47,12 @@ class PostsController < ApplicationController
         end
       end
     end
+  end
+
+  def sort_by
+    sort_by = (params[:order] == 'replies_count') ? 'replies_count DESC' :
+              (params[:order] == 'last_replied_at') ? 'created_at DESC'  : 
+              (params[:order] == 'vieweds_count') ? 'vieweds_count DESC' : 'id'
   end
 
 end

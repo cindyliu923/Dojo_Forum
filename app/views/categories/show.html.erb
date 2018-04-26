@@ -17,6 +17,16 @@
     </ul>  
     <br>
 
+        <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col"><%= link_to 'Replies count', category_path( :order => "replies_count") %></th>
+          <th scope="col">Title</th>
+          <th scope="col"><%= link_to 'Last replied at', category_path( :order => "last_replied_at") %></th>
+          <th scope="col"><%= link_to 'Viewed count', category_path( :order => "vieweds_count") %></th>
+        </tr>
+      </thead>
+
     <%= render partial: "shared/post_list" %>
 
   </div>
