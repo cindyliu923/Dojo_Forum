@@ -43,6 +43,28 @@ class PostsController < ApplicationController
     end
   end
 
+  def update
+    if params[:commit] == "Submit"
+      @post.status = 'publish'
+      if @post.update(post_params)
+        create_categories
+        redirect_to post_path(@post)
+      else
+        flash.now[:alert] = "post was failed to update"
+        render :edit
+      end
+    elsif params[:commit] == "Save Draft"
+      if @post.update(post_params)
+        create_categories
+        flash[:notice] = "post was successfully updated"      
+        redirect_to drafts_user_path(@post.user)
+      else
+        flash.now[:alert] = "post was failed to update"
+        render :edit
+      end
+    end
+  end
+
   def destroy
     @post.destroy
     redirect_to drafts_user_path(@post.user)
@@ -63,7 +85,13 @@ class PostsController < ApplicationController
     if params["categories"].present?
       params["categories"].each do |key, value|
         if value == {"category_of_post_ids"=>"1"}
-          @post.category_of_posts.create(category_id: key)
+          if @post.category_of_posts.where(category_id: key).empty?
+            @post.category_of_posts.create(category_id: key)
+          end
+        elsif value == {"category_of_post_ids"=>"0"}
+          if @post.category_of_posts.where(category_id: key).exists?
+            @post.category_of_posts.where(category_id: key).destroy_all
+          end          
         end
       end
     end
