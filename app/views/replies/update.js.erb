@@ -1,0 +1,2 @@
+<% html = j( render :partial => "replies/reply", :locals => { :reply => @reply }  ) %>
+$("div#<%= @reply.id %>").html("<%= html %>")

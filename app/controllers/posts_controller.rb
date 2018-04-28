@@ -67,8 +67,14 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to drafts_user_path(@post.user)
+    redirect_back(fallback_location: root_path)
     flash[:alert] = "draft was deleted"
+  end
+
+  def show
+    @user = @post.user
+    @reply = Reply.new
+    @replies = @post.replies.page(params[:page]).per(20)
   end
 
   private

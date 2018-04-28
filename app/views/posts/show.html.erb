@@ -1,0 +1,56 @@
+<div class="post-index" >
+  <div class="col-md-12">
+    <div class="p-4"></div>
+      <div class="head-title p-3">
+        <h3><%= @post.title %></h3>          
+      </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-6 col-md-3">
+      <%= image_tag @user.avatar, class: "user-avatar img-thumbnail" if @user.avatar? %>
+      <h4 class="text-center"><%= @user.name %></h4>
+    </div>
+    <div class="col-12 col-sm-6 col-md-9">
+      <%= image_tag @post.image, class: "post-image img-thumbnail" if @post.image? %>
+      <p><%= @post.description %></p>
+      <div class="clearfix">
+        <% if current_user.admin? %>
+          <%= link_to "Delete", post_path(@post), class: "btn btn-dark float-right", method: :delete, data: { confirm: "Are you sure?"} %>
+        <% end %>
+        <% if @user == current_user %>
+          <%= link_to 'delete', post_path(@post), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
+          <%= link_to "edit", edit_post_path(@post), class: "btn float-right" %>
+        <% end %>        
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="container">
+  <div class="row">
+    <% @replies.each do |reply| %>
+    <div class="col-6 col-md-3">
+      <%= image_tag reply.user.avatar, class: "user-avatar img-thumbnail" if reply.user.avatar? %>      
+      <h4 class="text-center"><%= reply.user.name %></h4>
+    </div>
+    <div id="<%= reply.id %>" class="col-12 col-sm-6 col-md-9">
+      <%= render partial: "replies/reply", :locals => { :reply => reply } %>
+    </div>
+    <% end %>
+    <div class="col-md-12">
+      <%= form_for [@post, @reply] do |f| %>
+        <div class="form-group">
+          <%= f.text_area :comment, placeholder: "add comment", class: "form-control", rows: "8" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Submit", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
