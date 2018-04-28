@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: :index
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = Post.all_publish.includes(:replies).order(sort_by).page(params[:page]).per(20)
@@ -9,6 +10,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @categories = Category.all
+    @category = @post.categories.ids
   end
 
   def create
@@ -33,7 +35,25 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @categories = Category.all
+    @category = @post.categories.ids
+    unless @post.user == current_user
+      redirect_to user_path(@post.user)
+    end
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to drafts_user_path(@post.user)
+    flash[:alert] = "draft was deleted"
+  end
+
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:title, :description, :permit, :image)
