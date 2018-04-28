@@ -20,4 +20,8 @@ class Post < ApplicationRecord
     where( :status => 'publish', :permit => 'all' ).all
   end
 
+  def self.drafts
+    where( :status => 'draft').all
+  end
+
 end

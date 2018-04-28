@@ -12,6 +12,11 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def drafts
+    @user = Post.find(params[:id]).user
+    @drafts = @user.posts.drafts
+  end
+
   private
 
   def set_user
