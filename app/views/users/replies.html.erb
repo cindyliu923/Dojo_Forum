@@ -1,0 +1,21 @@
+<%= render partial: "shared/user_head" %>
+<div class="container">
+  <div class="row">
+    <% @replies.each do |reply| %>
+    <div class="col-12 col-sm-6 col-md-9">
+      <h4><%= reply.post.title %></h4>
+      <div id="<%= reply.id %>">
+        <div class="card reply-card">
+          <div class="card-body">
+            <%= simple_format reply.comment %>
+          </div>
+        </div>
+        <% if reply.user == current_user %>
+          <%= link_to "Delete", post_reply_path(reply.post, reply), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
+          <%= link_to "Edit", edit_post_reply_path(reply.post, reply), class: "btn float-right", remote: true %>
+        </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

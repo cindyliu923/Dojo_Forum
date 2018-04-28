@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     member do
       get :drafts
       get :posts
-      get :comments
+      get :replies
       get :collects
       get :friends
     end
@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     collection do
       get :feeds
     end
+    member do
+      post :collect
+      post :uncollect   
+    end    
   end
   resources :categories, only: :show
   root "posts#index"

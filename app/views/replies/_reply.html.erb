@@ -1,9 +1,9 @@
 <div class="card reply-card">
   <div class="card-body">
     <%= simple_format reply.comment %>
-    <% if reply.user == current_user %>
-      <%= link_to "Delete", post_reply_path(@post, reply), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
-      <%= link_to "Edit", edit_post_reply_path(@post, reply), class: "btn float-right", remote: true %>
-    <% end %>
   </div>
 </div>
+  <% if reply.user == current_user %>
+    <%= link_to "Delete", post_reply_path(@post, reply), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
+    <%= link_to "Edit", edit_post_reply_path(@post, reply), class: "btn float-right", remote: true %>
+  <% end %>

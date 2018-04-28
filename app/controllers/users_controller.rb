@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :posts]
+  before_action :set_user, only: [:show, :edit, :update, :posts, :replies]
 
   def edit 
     unless @user == current_user
@@ -24,6 +24,10 @@ class UsersController < ApplicationController
 
   def show
     @posts = @user.posts.publishs    
+  end
+
+  def replies
+    @replies = @user.replies
   end
 
   private

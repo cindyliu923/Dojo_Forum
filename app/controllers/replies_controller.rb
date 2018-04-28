@@ -18,7 +18,7 @@ class RepliesController < ApplicationController
 
   def destroy
     @reply.destroy
-    redirect_to post_path(@post)
+    redirect_back(fallback_location: root_path)
   end
 
   def update
