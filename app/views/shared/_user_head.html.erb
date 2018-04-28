@@ -18,6 +18,10 @@
   <li class="nav-item"><%= link_to "My Post", posts_user_path, class: "nav-link #{'active' if @posts.present? }" %></li>
   <li class="nav-item"><%= link_to "My Comment", comments_user_path, class: "nav-link #{'active' if @comments.present? }" %></li>
   <li class="nav-item"><%= link_to "My Collect", collects_user_path, class: "nav-link #{'active' if @collects.present? }" %></li>
-  <li class="nav-item"><%= link_to "My Draft", drafts_user_path, class: "nav-link #{'active' if @drafts.present? }" %></li>
+  <% if @user == current_user %>
+    <li class="nav-item"><%= link_to "My Draft", drafts_user_path, class: "nav-link #{'active' if @drafts.present? }" %></li>  
+  <% else %>
+    <li class="nav-item nav-link disabled" href="#">My Draft</li>
+  <% end %>
   <li class="nav-item"><%= link_to "My Friend", friends_user_path, class: "nav-link #{'active' if @friends.present? }" %></li>
 </ul>

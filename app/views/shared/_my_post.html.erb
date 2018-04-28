@@ -1,0 +1,22 @@
+  <table class="table table-hover">
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <th class="text-center"><%= post.title %></th>
+          <td class="text-center"><%= post.status %>ed</td>
+          <td class="text-center"><%= post.created_at.to_date %></td>
+          <% if post.user == current_user %>
+            <td><%= link_to "edit", edit_post_path(post) %>
+                <%= link_to 'delete', post_path(post), method: :delete, data: { confirm: "Are you sure?"} %>
+            </td>
+          <% end %>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<div class="container">
+  <div class="row">
+    <div><%= link_to "New Post", new_post_path, class: "btn btn-success"%></div>
+  </div>
+</div>

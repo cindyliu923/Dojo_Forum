@@ -24,4 +24,8 @@ class Post < ApplicationRecord
     where( :status => 'draft').all
   end
 
+  def self.publishs
+    where( :status => 'publish').all
+  end  
+
 end
