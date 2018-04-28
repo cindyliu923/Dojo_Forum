@@ -22,11 +22,11 @@ class PostsController < ApplicationController
       else
         render :new
       end
-    elsif params[:commit] == "draft"
+    elsif params[:commit] == "Save Draft"
       @post.status = 'draft'
       if @post.save
         create_categories
-        redirect_to draft_user_path(@post)
+        redirect_to drafts_user_path(@post.user)
       else
         render :new
       end
