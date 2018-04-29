@@ -1,16 +1,21 @@
-  <tbody>
-    <% @posts.each do |post| %>
-    <tr>
-      <th scope="row"><%= post.replies_count %></th>
-      <td><%= post.title %></td>
-      <td><% if post.replies.present? %>
-          <%= post.last_replied_at %>
-          <% end %></td>
-      <td><%= post.vieweds_count %></td>
-    </tr>
+  <tbody> 
+    <% @posts.each do |post| %>   
+      <tr data-link="<%= post_path(post) %>">
+        <th scope="row"><%= post.replies_count %></th>
+        <td><%= post.title %></td>
+        <td><% if post.replies.present? %>
+            <%= post.last_replied_at %>
+            <% end %></td>
+        <td><%= post.vieweds_count %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>
-
 <%= paginate @posts %>
+
+<script type="text/javascript">
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })  
+</script>
 

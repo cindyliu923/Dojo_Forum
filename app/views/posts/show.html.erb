@@ -13,8 +13,10 @@
 <div class="container">
   <div class="row">
     <div class="col-6 col-md-3">
-      <%= image_tag @user.avatar, class: "user-avatar img-thumbnail" if @user.avatar? %>
-      <h4 class="text-center"><%= @user.name %></h4>
+      <%= link_to user_path(@user) do %>
+        <%= image_tag @user.avatar, class: "user-avatar img-thumbnail" if @user.avatar? %>
+        <h4 class="text-center"><%= @user.name %></h4>
+      <% end %>
     </div>
     <div class="col-12 col-sm-6 col-md-9">
       <%= image_tag @post.image, class: "post-image img-thumbnail" if @post.image? %>
@@ -32,13 +34,14 @@
   </div>
 </div>
 <hr>
-
 <div class="container">
   <div class="row">
     <% @replies.each do |reply| %>
     <div class="col-6 col-md-3">
-      <%= image_tag reply.user.avatar, class: "user-avatar img-thumbnail" if reply.user.avatar? %>      
-      <h4 class="text-center"><%= reply.user.name %></h4>
+      <%= link_to user_path(reply.user) do %>
+        <%= image_tag reply.user.avatar, class: "user-avatar img-thumbnail" if reply.user.avatar? %>      
+        <h4 class="text-center"><%= reply.user.name %></h4>
+      <% end %>
     </div>
     <div id="<%= reply.id %>" class="col-12 col-sm-6 col-md-9">
       <%= render partial: "replies/reply", :locals => { :reply => reply } %>
@@ -54,7 +57,6 @@
         </div>
       <% end %>
     </div>
+    <%= paginate @replies %>
   </div>
 </div>
-
-
