@@ -17,6 +17,9 @@
         <%= image_tag @user.avatar, class: "user-avatar img-thumbnail" if @user.avatar? %>
         <h4 class="text-center"><%= @user.name %></h4>
       <% end %>
+      <div class="post-add-friend">
+        <%= render partial: "shared/add_friend", locals: {user: @user} %>
+      </div>
     </div>
     <div class="col-12 col-sm-6 col-md-9">
       <%= image_tag @post.image, class: "post-image img-thumbnail" if @post.image? %>
@@ -42,6 +45,9 @@
         <%= image_tag reply.user.avatar, class: "user-avatar img-thumbnail" if reply.user.avatar? %>      
         <h4 class="text-center"><%= reply.user.name %></h4>
       <% end %>
+      <div class="post-add-friend">
+        <%= render partial: "shared/add_friend", locals: {user: reply.user} %>
+      </div>    
     </div>
     <div id="<%= reply.id %>" class="col-12 col-sm-6 col-md-9">
       <%= render partial: "replies/reply", :locals => { :reply => reply } %>

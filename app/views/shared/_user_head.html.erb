@@ -7,6 +7,9 @@
           <h4><%= @user.name %></h4>
         </div>
         <p><%= @user.introduction %></p>
+        <div class="user-edit-button" style="float:right">
+          <%= render partial: "shared/add_friend", locals: {user: @user} %>
+        </div>
         <% if @user.email == current_user.email %>
           <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-success user-edit-button", style: "float:right" %>
         <% end %>

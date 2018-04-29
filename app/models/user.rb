@@ -23,4 +23,8 @@ class User < ApplicationRecord
     self.role == "admin"
   end
 
+  def friend?(user)
+    self.friends.include?(user)
+  end
+
 end
