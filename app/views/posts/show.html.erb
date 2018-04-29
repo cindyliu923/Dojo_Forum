@@ -3,8 +3,8 @@
     <div class="p-4"></div>
       <div class="head-title p-3">
         <h3><%= @post.title %></h3>
-          <div id="collect-<%= @post.id %>"> 
-            <%= render partial: "shared/collect" %>
+          <div id="collect-<%= @post.id %>" class="float-right collect-show-btn"> 
+            <%= render partial: "shared/collect", :locals => { :post => @post } %>
           </div>
       </div>
   </div>

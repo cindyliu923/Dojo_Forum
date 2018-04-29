@@ -13,9 +13,9 @@
         <% if reply.user == current_user %>
           <%= link_to "Delete", post_reply_path(reply.post, reply), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
           <%= link_to "Edit", edit_post_reply_path(reply.post, reply), class: "btn float-right", remote: true %>
-        </div>
         <% end %>
       </div>
+    </div>
     <% end %>
   </div>
 </div>

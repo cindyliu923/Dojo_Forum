@@ -1,0 +1,15 @@
+<%= render partial: "shared/user_head" %>
+  <table class="table table-hover">
+    <tbody>
+      <% @collects.each do |collect| %>
+        <tr>
+          <th class="text-center"><%= collect.post.title %></th>
+          <td></td>
+          <td></td>
+          <td><div id="collect-<%= collect.post.id %>"> 
+            <%= render partial: "shared/collect", :locals => { :post => collect.post }  %>
+          </div></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
