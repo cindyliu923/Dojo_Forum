@@ -1,0 +1,4 @@
+var uncollect = document.createElement("div");
+uncollect.id = "collect-<%= @post.id %>";
+uncollect.innerHTML = "<%= j render(:partial => "shared/collect") %>";
+$("div#collect-<%= @post.id %>").html(uncollect);

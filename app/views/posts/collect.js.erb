@@ -1,0 +1,5 @@
+var collect = document.createElement("div");
+collect.id = "collect-<%= @post.id %>";
+collect.innerHTML = "<%= j render(:partial => "shared/collect") %>";
+$("div#collect-<%= @post.id %>").html(collect);
+

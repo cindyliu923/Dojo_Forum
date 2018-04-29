@@ -28,4 +28,8 @@ class Post < ApplicationRecord
     where( :status => 'publish').all
   end  
 
+  def is_collected?(user)
+    self.collected_users.include?(user)
+  end
+
 end

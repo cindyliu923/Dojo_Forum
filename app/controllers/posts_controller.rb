@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :collect, :uncollect]
 
   def index
     @posts = Post.all_publish.includes(:replies).order(sort_by).page(params[:page]).per(20)
@@ -75,6 +75,15 @@ class PostsController < ApplicationController
     @user = @post.user
     @reply = Reply.new
     @replies = @post.replies.page(params[:page]).per(20)
+  end
+
+  def collect
+    @post.collects.create!(user: current_user)
+  end
+
+  def uncollect
+    collect = Collect.where(post: @post, user: current_user)
+    collect.destroy_all
   end
 
   private
