@@ -3,6 +3,7 @@
     <div class="p-4"></div>
       <div class="head-title p-3">
         <h3><%= @post.title %></h3>
+        <a href="#replyjump" class="btn btn-primary btn-sm float-right comment-btn">Comment</a>
           <div id="collect-<%= @post.id %>" class="float-right collect-show-btn"> 
             <%= render partial: "shared/collect", :locals => { :post => @post } %>
           </div>
@@ -43,7 +44,7 @@
       <%= render partial: "replies/reply", :locals => { :reply => reply } %>
     </div>
     <% end %>
-    <div class="col-md-12">
+    <div id="replyjump" class="col-md-12">
       <%= form_for [@post, @reply] do |f| %>
         <div class="form-group">
           <%= f.text_area :comment, placeholder: "add comment", class: "form-control", rows: "8" %>
