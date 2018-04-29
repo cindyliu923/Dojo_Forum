@@ -1,17 +1,16 @@
+  <tbody>
+    <% @posts.each do |post| %>
+    <tr>
+      <th scope="row"><%= post.replies_count %></th>
+      <td><%= post.title %></td>
+      <td><% if post.replies.present? %>
+          <%= post.last_replied_at %>
+          <% end %></td>
+      <td><%= post.vieweds_count %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
-      <tbody>
-        <% @posts.each do |post| %>
-        <tr>
-          <th scope="row"><%= post.replies_count %></th>
-          <td><%= post.title %></td>
-          <td><% if post.replies.present? %>
-                <%= post.replies.last.created_at.to_date %>
-              <% end %></td>
-          <td><%= post.vieweds_count %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-  <%= paginate @posts %>
+<%= paginate @posts %>
 

@@ -32,4 +32,8 @@ class Post < ApplicationRecord
     self.collected_users.include?(user)
   end
 
+  def last_replied_at
+    self.replies.first.created_at.to_date #因為order DESC
+  end
+
 end
