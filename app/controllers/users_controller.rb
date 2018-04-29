@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :posts, :replies, :collects]
+  before_action :set_user, only: [:show, :edit, :update, :posts, :replies, :collects, :drafts]
 
   def edit 
     unless @user == current_user
@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def drafts
-    @user = Post.find(params[:id]).user
     @drafts = @user.posts.drafts
     unless @user == current_user
       redirect_to user_path(@user)
