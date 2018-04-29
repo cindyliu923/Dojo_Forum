@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get :friends
     end
   end
+  resources :friendships, only: [:create, :destroy, :update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :posts do 
     resources :replies, only: [:create, :destroy, :edit, :update]
