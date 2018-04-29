@@ -1,0 +1,75 @@
+<div class="post-index" >
+  <div class="col-md-12">
+    <div class="p-4"></div>
+      <div class="head-title p-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+            <h3 class="text-center">User</h3>
+            <div class="card text-center">
+              <div class="card-body">
+                <h4><%= @users_count %></h4>
+              </div>
+              </div>
+            </div>  
+            <div class="col-sm">
+            <h3 class="text-center">Post</h3>
+            <div class="card text-center">
+              <div class="card-body">
+                <h4><%= @post_count %></h4> 
+              </div>
+            </div> 
+            </div>
+            <div class="col-sm">
+            <h3 class="text-center">Comment</h3>
+            <div class="card text-center">
+              <div class="card-body">
+                <h4><%= @replies_count %></h4> 
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-5">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <h2 class="text-center">Chatterbox</h2>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @chatterbox_user.each_with_index do |user,index| %>
+            <th scope="row"><%= index +1 %></th>
+              <td><%= user.name %></td>
+              <td><%= user.replies.size %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-5">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <h2 class="text-center">Most Popular Post</h2>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @popular_posts.each_with_index do |post,index| %>
+            <th scope="row"><%= index +1 %></th>
+              <td><%= post.title %></td>
+              <td><%= post.created_at.to_date %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

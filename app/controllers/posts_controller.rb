@@ -72,6 +72,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    add_view
     @user = @post.user
     @reply = Reply.new
     @replies = @post.replies.page(params[:page]).per(20)
@@ -86,7 +87,19 @@ class PostsController < ApplicationController
     collect.destroy_all
   end
 
+  def feeds
+    @users_count = User.all.size
+    @post_count = Post.publishs.size
+    @replies_count = Reply.all.size
+    @popular_posts = Post.publishs.order(replies_count: :desc).limit(10)
+    @chatterbox_user = User.left_joins(:replies).group(:id).order('COUNT(replies.id) DESC').limit(10)
+  end
+
   private
+
+  def add_view 
+    Viewed.create(post: @post, user: current_user)
+  end
 
   def set_post
     @post = Post.find(params[:id])
