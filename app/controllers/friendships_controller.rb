@@ -10,6 +10,21 @@ class FriendshipsController < ApplicationController
     end
   end
 
+  def ignore
+    Friendship.where(user_id: params[:friend_id], friend_id: current_user).update(status: 'ignore')
+    redirect_back(fallback_location: root_path)
+  end
+
+  def connect
+    if Friendship.where(user_id: params[:friend_id], friend_id: current_user).update(status: 'connect')
+      flash[:notice] = "Successfully be friend!"
+      redirect_back(fallback_location: root_path)
+    else
+      flash.now[:alert] = "friendship was failed to connect"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   def destroy
     @friendship = current_user.friendships.where(friend_id: params[:id]) 
     @friendship.destroy_all 

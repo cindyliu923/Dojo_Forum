@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   def friends
-    @friends = @user.connect_friends
+    @friends = @user.all_friends
     @wait_friends = @user.wait_friends
     @unconfirm_friends = @user.unconfirm_friends
   end
