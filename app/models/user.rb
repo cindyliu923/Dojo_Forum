@@ -16,6 +16,15 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
+  has_many :connect_friendships, -> {where status: 'connect'}, class_name: "Friendship", dependent: :destroy
+  has_many :connect_friends, through: :connect_friendships, source: :friend
+
+  has_many :wait_friendships, -> {where status: 'send'}, class_name: "Friendship", dependent: :destroy
+  has_many :wait_friends, through: :wait_friendships, source: :friend
+
+  has_many :unconfirm_friendships, -> {where status: 'send'}, class_name: "Friendship", foreign_key: "friend_id"
+  has_many :unconfirm_friends, through: :unconfirm_friendships, source: :user
+
   has_many :collects, dependent: :destroy
   has_many :collected_posts, through: :collects, source: :post
 

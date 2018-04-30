@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :posts, :replies, :collects, :drafts]
+  before_action :set_user, only: [:show, :edit, :update, :posts, :replies, :collects, :drafts, :friends]
 
   def edit 
     unless @user == current_user
@@ -34,6 +34,12 @@ class UsersController < ApplicationController
 
   def collects
     @collects = @user.collects
+  end
+
+  def friends
+    @friends = @user.connect_friends
+    @wait_friends = @user.wait_friends
+    @unconfirm_friends = @user.unconfirm_friends
   end
 
   private
