@@ -1,0 +1,2 @@
+document.getElementById("remove-<%= @friend.id %>-friend").remove();
+document.getElementById("change-friend-<%= @friend.id %>-msg").innerHTML = '已同意加入<%= link_to user_path(@friend) do %><%= @friend.name %><% end %>的好友名單';

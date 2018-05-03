@@ -1,4 +1,4 @@
 <% if @user == current_user %>
-  <%= link_to 'Accept', connect_friendship_path(friend_id: user), method: :patch, class: "btn btn-success" %><br/>
-  <%= link_to 'Ignore', ignore_friendship_path(friend_id: user), method: :patch, class: "btn btn-info" %>
+  <%= link_to 'Accept', connect_friendship_path(friend_id: user), method: :patch, class: "btn btn-success", remote: true %><br/>
+  <%= link_to 'Ignore', ignore_friendship_path(friend_id: user), method: :patch, class: "btn btn-info", remote: true %>
 <% end %>
