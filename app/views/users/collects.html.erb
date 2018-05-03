@@ -2,7 +2,7 @@
   <table class="table table-hover">
     <tbody>
       <% @collects.each do |collect| %>
-        <tr>
+        <tr data-link="<%= post_path(collect) %>">
           <th class="text-center"><%= collect.post.title %></th>
           <td></td>
           <td></td>
@@ -13,3 +13,9 @@
       <% end %>
     </tbody>
   </table>
+  
+<script type="text/javascript">
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })  
+</script>
