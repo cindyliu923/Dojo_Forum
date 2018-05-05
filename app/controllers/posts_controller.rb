@@ -93,7 +93,7 @@ class PostsController < ApplicationController
     @post_count = Post.publishs.size
     @replies_count = Reply.all.size
     @popular_posts = Post.all_publish(current_user).order(replies_count: :desc).limit(10)
-    @chatterbox_user = User.left_joins(:replies).group(:id).order('COUNT(replies.id) DESC').limit(10)
+    @chatterbox_user = User.all.order(replies_count: :desc).limit(10)
   end
 
   private
