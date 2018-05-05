@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :posts, :replies, :collects, :drafts, :friends]
+  before_action :find_posts, only: [:posts, :show]
 
   def edit 
     unless @user == current_user
@@ -18,14 +19,6 @@ class UsersController < ApplicationController
     unless @user == current_user
       redirect_to user_path(@user)
     end
-  end
-
-  def posts
-    @posts = @user.posts.publishs
-  end
-
-  def show
-    @posts = @user.posts.publishs    
   end
 
   def replies
@@ -46,6 +39,10 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def find_posts
+    @posts = @user.posts.all_publish(current_user) 
   end
 
   def user_params

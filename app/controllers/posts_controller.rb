@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :collect, :uncollect]
 
   def index
-    @posts = Post.all_publish.includes(:replies).order(sort_by).page(params[:page]).per(20)
+    @posts = Post.all_publish(current_user).includes(:replies).order(sort_by).page(params[:page]).per(20)
     @categories = Category.all
   end
 
@@ -91,7 +91,7 @@ class PostsController < ApplicationController
     @users_count = User.all.size
     @post_count = Post.publishs.size
     @replies_count = Reply.all.size
-    @popular_posts = Post.publishs.order(replies_count: :desc).limit(10)
+    @popular_posts = Post.all_publish(current_user).order(replies_count: :desc).limit(10)
     @chatterbox_user = User.left_joins(:replies).group(:id).order('COUNT(replies.id) DESC').limit(10)
   end
 

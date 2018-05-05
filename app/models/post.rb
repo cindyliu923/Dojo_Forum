@@ -16,8 +16,12 @@ class Post < ApplicationRecord
   has_many :collects, dependent: :destroy
   has_many :collected_users, through: :collects, source: :user
 
-  def self.all_publish 
-    where( :status => 'publish', :permit => 'all' ).all
+  def self.all_publish(user)
+    if user.present?
+      where( :status => 'publish').where("permit IS ? AND posts.user_id IS ? OR permit IS ? OR permit IS ? AND posts.user_id IN (?)", 'myself',user,'all','friend',user.beconnect_friends_ids << user.id)
+    else
+      where( :status => 'publish', :permit => 'all')
+    end
   end
 
   def self.drafts
