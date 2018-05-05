@@ -18,6 +18,9 @@
 <hr/>
  <div class="container">
   <div class="row">
+    <div class="col-12">
+      <h4 class="text-center">Unconfirm friend request</h4>
+    </div>
     <% @unconfirm_friends.each do |friend| %>
     <div id="change-friend-<%= friend.id %>-msg"></div>
     <div class="col" id="remove-<%= friend.id %>-friend">
@@ -34,6 +37,9 @@
 <% end %>
  <div class="container">
   <div class="row">
+    <div class="col-12">
+      <h4 class="text-center">My Friends List</h4>
+    </div>
     <% @friends.each do |friend| %>
     <div class="col">
       <%= link_to user_path(friend) do %>

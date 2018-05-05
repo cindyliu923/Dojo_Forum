@@ -67,9 +67,15 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    redirect_back(fallback_location: root_path)
-    flash[:alert] = "draft was deleted"
+    if @post.status == 'draft'
+      @post.destroy
+      redirect_to drafts_user_path(current_user)
+      flash[:alert] = "draft was deleted"  
+    else   
+      @post.destroy
+      redirect_to posts_user_path(current_user)
+      flash[:alert] = "post was deleted"
+    end
   end
 
   def show
