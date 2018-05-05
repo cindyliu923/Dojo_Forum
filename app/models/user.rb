@@ -35,12 +35,15 @@ class User < ApplicationRecord
     self.role == "admin"
   end
 
-  def friend?(user)
+  def add_friend?(user)
     self.friends.include?(user)
   end
 
+  def beconnect_friends_ids
+    self.beconnect_friends.ids
+  end
+
   def all_friends
-    self.beconnect_friends.all.uniq ||
     self.connect_friends.all.uniq
   end
 
