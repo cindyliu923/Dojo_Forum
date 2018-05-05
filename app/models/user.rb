@@ -39,8 +39,8 @@ class User < ApplicationRecord
     self.friends.include?(user)
   end
 
-  def beconnect_friends_ids
-    self.beconnect_friends.ids
+  def beconnect_friends_ids(user) 
+    self.beconnect_friends.ids << user.id #把自己加入
   end
 
   def all_friends

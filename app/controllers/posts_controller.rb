@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :set_post, only: [:show, :edit, :update, :destroy, :collect, :uncollect]
+  before_action :authenticate_permit_user, only: [:show]
 
   def index
     @posts = Post.all_publish(current_user).includes(:replies).order(sort_by).page(params[:page]).per(20)

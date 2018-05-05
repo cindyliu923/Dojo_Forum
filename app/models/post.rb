@@ -18,7 +18,7 @@ class Post < ApplicationRecord
 
   def self.all_publish(user)
     if user.present?
-      where( :status => 'publish').where("permit IS ? AND posts.user_id IS ? OR permit IS ? OR permit IS ? AND posts.user_id IN (?)", 'myself',user,'all','friend',user.beconnect_friends_ids << user.id)
+      where( :status => 'publish').where("permit IS ? AND posts.user_id IS ? OR permit IS ? OR permit IS ? AND posts.user_id IN (?)", 'myself',user,'all','friend',user.beconnect_friends_ids(user))
     else
       where( :status => 'publish', :permit => 'all')
     end
@@ -38,6 +38,12 @@ class Post < ApplicationRecord
 
   def last_replied_at
     self.replies.first.created_at.to_date #因為order DESC
+  end
+
+  def permit_user?(user)
+    self.permit == 'friend' && self.user.beconnect_friends_ids(self.user).include?(user.id) ||
+    self.permit == 'myself' && self.user == user ||
+    self.permit == 'all'
   end
 
 end
