@@ -1,8 +1,8 @@
 <%= render partial: "shared/user_head" %>
   <table class="table table-hover">
-    <tbody>
+    <tbody class="linkMOUSE">
       <% @collects.each do |collect| %>
-        <tr data-link="<%= post_path(collect) %>">
+        <tr data-link="<%= post_path(collect.post) %>">
           <th class="text-center"><%= collect.post.title %></th>
           <td></td>
           <td></td>

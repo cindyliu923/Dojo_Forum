@@ -1,4 +1,4 @@
-  <tbody> 
+  <tbody class="linkMOUSE"> 
     <% @posts.each do |post| %>   
       <tr data-link="<%= post_path(post) %>">
         <th scope="row"><%= post.replies_count %></th>

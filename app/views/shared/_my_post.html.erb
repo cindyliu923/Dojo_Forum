@@ -1,7 +1,7 @@
   <table class="table table-hover">
-    <tbody>
+    <tbody class="linkMOUSE">
       <% @posts.each do |post| %>
-        <tr>
+        <tr data-link="<%= post_path(post) %>">
           <th class="text-center"><%= post.title %></th>
           <td class="text-center"><%= post.status %>ed</td>
           <td class="text-center"><%= post.created_at.to_date %></td>
@@ -20,3 +20,9 @@
     <div><%= link_to "New Post", new_post_path, class: "btn btn-success"%></div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })  
+</script>

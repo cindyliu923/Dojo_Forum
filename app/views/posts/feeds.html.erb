@@ -42,9 +42,9 @@
             <h2 class="text-center">Chatterbox</h2>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <% @chatterbox_user.each_with_index do |user,index| %>
+        <tbody class="linkMOUSE">
+          <% @chatterbox_user.each_with_index do |user,index| %>
+          <tr data-link="<%= user_path(user) %>">
             <th scope="row"><%= index +1 %></th>
               <td><%= user.name %></td>
               <td><%= user.replies.size %></td>
@@ -60,9 +60,9 @@
             <h2 class="text-center">Most Popular Post</h2>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <% @popular_posts.each_with_index do |post,index| %>
+        <tbody class="linkMOUSE">
+          <% @popular_posts.each_with_index do |post,index| %>
+          <tr data-link="<%= post_path(post) %>">
             <th scope="row"><%= index +1 %></th>
               <td><%= post.title %></td>
               <td><%= post.created_at.to_date %></td>
@@ -73,3 +73,9 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })  
+</script>
