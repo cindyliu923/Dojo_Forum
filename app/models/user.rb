@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  mount_uploader :avatar, ImageUploader
+  mount_uploader :avatar, AvatarUploader
   validates_presence_of :name 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

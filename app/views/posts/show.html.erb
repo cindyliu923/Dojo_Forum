@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-6 col-md-3">
       <%= link_to user_path(@user) do %>
-        <%= image_tag @user.avatar, class: "user-avatar img-thumbnail" if @user.avatar? %>
+        <%= image_tag @user.avatar, class: "user-avatar img-thumbnail" %>
         <h4 class="text-center"><%= @user.name %></h4>
       <% end %>
       <div class="post-add-friend">
@@ -42,7 +42,7 @@
     <% @replies.each do |reply| %>
     <div class="col-6 col-md-3">
       <%= link_to user_path(reply.user) do %>
-        <%= image_tag reply.user.avatar, class: "user-avatar img-thumbnail" if reply.user.avatar? %>      
+        <%= image_tag reply.user.avatar, class: "user-avatar img-thumbnail" %>      
         <h4 class="text-center"><%= reply.user.name %></h4>
       <% end %>
       <div class="post-add-friend">

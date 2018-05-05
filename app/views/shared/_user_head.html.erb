@@ -3,7 +3,7 @@
     <div class="p-4"></div>
       <div class="head-title p-5">
         <div style="float:left">
-          <%= image_tag @user.avatar, class: "user-avatar img-thumbnail" if @user.avatar? %>
+          <%= image_tag @user.avatar, class: "user-avatar img-thumbnail" %>
           <h4><%= @user.name %></h4>
         </div>
         <p><%= @user.introduction %></p>

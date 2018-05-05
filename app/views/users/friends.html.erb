@@ -8,7 +8,7 @@
     <% @wait_friends.each do |friend| %>
     <div class="col">
       <%= link_to user_path(friend) do %>
-        <%= image_tag friend.avatar, class: "friend-avatar img-thumbnail" if friend.avatar? %>
+        <%= image_tag friend.avatar, class: "friend-avatar img-thumbnail" %>
         <h5><%= friend.name %></h5>
       <% end %>
     </div>
@@ -25,7 +25,7 @@
     <div id="change-friend-<%= friend.id %>-msg"></div>
     <div class="col" id="remove-<%= friend.id %>-friend">
       <%= link_to user_path(friend) do %>
-        <%= image_tag friend.avatar, class: "friend-avatar img-thumbnail" if friend.avatar? %>
+        <%= image_tag friend.avatar, class: "friend-avatar img-thumbnail" %>
         <h5><%= friend.name %></h5>
       <% end %>
       <%= render partial: "shared/accept_friend", locals: {user: friend} %>
@@ -43,7 +43,7 @@
     <% @friends.each do |friend| %>
     <div class="col">
       <%= link_to user_path(friend) do %>
-        <%= image_tag friend.avatar, class: "friend-avatar img-thumbnail" if friend.avatar? %>
+        <%= image_tag friend.avatar, class: "friend-avatar img-thumbnail" %>
         <h5><%= friend.name %></h5>
       <% end %>
     </div>
