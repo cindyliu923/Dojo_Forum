@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_create :generate_authentication_token
   mount_uploader :avatar, AvatarUploader
   validates_presence_of :name 
   # Include default devise modules. Others available are:
@@ -31,6 +32,10 @@ class User < ApplicationRecord
 
   has_many :collects, dependent: :destroy
   has_many :collected_posts, through: :collects, source: :post
+
+  def generate_authentication_token
+     self.authentication_token = Devise.friendly_token
+  end
 
   def admin?
     self.role == "admin"
