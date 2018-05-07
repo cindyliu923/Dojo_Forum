@@ -56,6 +56,14 @@ class Api::V1::PostsController < ApiController
     end
   end
 
+  def destroy
+    @post = Post.find_by(id: params[:id])
+    @post.destroy
+    render json: {
+      message: "Post destroy successfully!"
+    }
+  end
+
   private
 
   def post_params
