@@ -17,9 +17,9 @@
             <th>Role</th>
           </tr>
         </thead>
-        <tbody class="linkMOUSE"> 
+        <tbody> 
           <% @users.each do |user| %>
-          <tr data-link="<%= user_path(user) %>" class="warning">
+          <tr class="warning">
             <th scope="row"><%= user.name %></th>
             <td><%= user.email %></td>
             <td><%= form_tag admin_user_path(user), :method => :patch do %>

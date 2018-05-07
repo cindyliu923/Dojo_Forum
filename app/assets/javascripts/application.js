@@ -16,9 +16,11 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
-
 $(document).on("turbolinks:load", function() {
-  $("tr[data-link]").click(function() {
-    window.location = $(this).data("link");
-  });  
+  $("tr[data-link]").click(function(event) {
+    if (!$(event.target).is('a')) {
+      window.location = $(this).data("link");
+      };
+    });
+
 });
