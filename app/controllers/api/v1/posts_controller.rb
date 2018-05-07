@@ -42,6 +42,20 @@ class Api::V1::PostsController < ApiController
     end
   end
 
+  def update
+    @post = Post.find_by(id: params[:id])
+    if @post.update(post_params)
+      render json: {
+        message: "Post updated successfully!",
+        result: @post
+      }
+    else
+      render json: {
+        errors: @post.errors
+      }
+    end
+  end
+
   private
 
   def post_params
