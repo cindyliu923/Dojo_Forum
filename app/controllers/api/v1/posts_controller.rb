@@ -1,5 +1,7 @@
 class Api::V1::PostsController < ApiController
   before_action :authenticate_user!, except: :index
+  before_action :set_post, only: [:show, :update, :destroy]
+  before_action :authenticate_permit_user, only: [:show]
 
   def index
     if params[:category_id]
@@ -14,7 +16,6 @@ class Api::V1::PostsController < ApiController
   end
 
   def show
-    @post = Post.find_by(id: params[:id])
     if !@post
       render json: {
         message: "Can't find the post!",
@@ -43,7 +44,6 @@ class Api::V1::PostsController < ApiController
   end
 
   def update
-    @post = Post.find_by(id: params[:id])
     if @post.update(post_params)
       render json: {
         message: "Post updated successfully!",
@@ -57,7 +57,6 @@ class Api::V1::PostsController < ApiController
   end
 
   def destroy
-    @post = Post.find_by(id: params[:id])
     @post.destroy
     render json: {
       message: "Post destroy successfully!"
@@ -66,8 +65,22 @@ class Api::V1::PostsController < ApiController
 
   private
 
+  def set_post
+    @post = Post.find_by(id: params[:id])
+  end
+
   def post_params
     params.permit(:title, :description, :permit, :image, :status)
+  end
+
+  def authenticate_permit_user
+    if set_post
+      unless set_post.permit_user?(current_user)
+        render json: {
+          message: "Not allow!"
+        }
+      end
+    end
   end
 
 end
