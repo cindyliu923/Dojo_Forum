@@ -2,8 +2,13 @@ class Api::V1::AuthController < ApiController
   before_action :authenticate_user!, :only => [:logout]
 
   def login
+    success = false
+
+    params[:email] && params[:password]
     user = User.find_by_email( params[:email] )
-    if user && user.valid_password?( params[:password] )
+    success = user && user.valid_password?( params[:password] )
+  
+    if success
       render :json => { :message => "Ok",
                         :auth_token => user.authentication_token,
                         :user_id => user.id }
