@@ -73,7 +73,7 @@ class PostsController < ApplicationController
       flash[:alert] = "draft was deleted"  
     else   
       @post.destroy
-      redirect_to posts_user_path(current_user)
+      redirect_to posts_user_path(@post.user)
       flash[:alert] = "post was deleted"
     end
   end

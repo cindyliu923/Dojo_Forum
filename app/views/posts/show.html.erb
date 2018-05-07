@@ -25,11 +25,10 @@
       <%= image_tag @post.image, class: "post-image img-thumbnail" if @post.image? %>
       <p><%= @post.description %></p>
       <div class="clearfix">
-        <% if current_user.admin? %>
-          <%= link_to "Delete", post_path(@post), class: "btn btn-dark float-right", method: :delete, data: { confirm: "Are you sure?"} %>
+        <% if @user == current_user || current_user.admin? %>
+          <%= link_to 'delete', post_path(@post), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
         <% end %>
         <% if @user == current_user %>
-          <%= link_to 'delete', post_path(@post), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
           <%= link_to "edit", edit_post_path(@post), class: "btn float-right" %>
         <% end %>        
       </div>
