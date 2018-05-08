@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="col-12 col-sm-6 col-md-9">
-      <%= image_tag @post.image, class: "post-image img-thumbnail" if @post.image? %>
+      <%= image_tag @post.image, class: "post-image img-thumbnail" %>
       <p><%= @post.description %></p>
       <div class="clearfix">
         <% if @user == current_user || current_user.admin? %>
