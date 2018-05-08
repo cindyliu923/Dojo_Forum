@@ -28,21 +28,48 @@ namespace :dev do
         permit = ["all","friend","myself"]
         user.posts.create!(
           title: FFaker::Movie.title,
-          description: FFaker::Lorem.sentence(50),
+          description: FFaker::Lorem.sentence(80),
           status: "publish",
           permit: permit.sample,
-      )
+        )
       end
     end
 
     Post.all.each do |post|
-      3.times do |i|
+      rand(1..3).times do |i|
         CategoryOfPost.create!(category: Category.all.sample, post: post)
       end
     end
 
     puts "have created fake posts"
     puts "now you have #{Post.count} post data"
+  end
+
+  task fake_reply: :environment do
+    Post.all.each do |post|   
+      rand(1..5).times do |i|
+        post.replies.create!(
+          comment: FFaker::Lorem.sentence(30),
+          user: User.all.sample,
+          created_at: FFaker::Time::between(Time.new(2018, 04, 01), Time.new(2018, 05, 13))
+        )
+      end
+    end
+    puts "have created fake replies"
+    puts "now you have #{Reply.count} reply data"
+  end
+
+  task fake_viewed: :environment do
+    Post.all.each do |post|   
+      rand(1..5).times do |i|
+        post.vieweds.create!(
+          post: post,
+          user: User.all.sample
+        )
+      end
+    end
+    puts "have created fake vieweds"
+    puts "now you have #{Viewed.count} viewed data"
   end
 
 end
