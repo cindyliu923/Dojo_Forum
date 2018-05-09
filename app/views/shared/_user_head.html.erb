@@ -4,14 +4,14 @@
       <div class="head-title p-5">
         <div style="float:left">
           <%= image_tag @user.avatar, class: "user-avatar img-thumbnail" %>
-          <h4><%= @user.name %></h4>
+          <h4 class="text-center"><%= @user.name %></h4>
         </div>
         <p><%= @user.introduction %></p>
-        <div class="user-edit-button" style="float:right">
+        <div class="user-edit-button">
           <%= render partial: "shared/add_friend", locals: {user: @user} %>
         </div>
         <% if @user.email == current_user.email %>
-          <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-success user-edit-button", style: "float:right" %>
+          <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-success user-edit-button" %>
         <% end %>
       </div>
   </div>
