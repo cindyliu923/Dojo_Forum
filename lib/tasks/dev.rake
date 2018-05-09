@@ -4,7 +4,7 @@ namespace :dev do
     User.destroy_all
     url = "https://uinames.com/api/?ext&region=england"
 
-    10.times do
+    20.times do
       response = RestClient.get(url)
       data = JSON.parse(response.body)
 
@@ -70,6 +70,21 @@ namespace :dev do
     end
     puts "have created fake vieweds"
     puts "now you have #{Viewed.count} viewed data"
+  end
+
+  task fake_friend: :environment do
+    Friendship.destroy_all
+      User.all.each do |user|   
+        10.times do |i|
+          status = ["send","connect"]
+          user.friendships.create!(
+            friend: User.all.where.not(id: user)[i],
+            status: status.sample
+          )
+        end
+      end
+    puts "have created fake friends"
+    puts "now you have #{Friendship.count} friend data"
   end
 
 end
