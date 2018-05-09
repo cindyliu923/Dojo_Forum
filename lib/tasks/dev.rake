@@ -46,11 +46,12 @@ namespace :dev do
   end
 
   task fake_reply: :environment do
-    Post.all.each do |post|   
-      rand(1..5).times do |i|
+    User.all.each do |user|
+      3.times do |post|
+        post = Post.all_publish(user).sample
         post.replies.create!(
           comment: FFaker::Lorem.sentence(30),
-          user: User.all.sample,
+          user: user,
           created_at: FFaker::Time::between(Time.new(2018, 04, 01), Time.new(2018, 05, 13))
         )
       end
@@ -70,6 +71,17 @@ namespace :dev do
     end
     puts "have created fake vieweds"
     puts "now you have #{Viewed.count} viewed data"
+  end
+
+  task fake_collect: :environment do
+    User.all.each do |user|
+      3.times do |post|
+        post = Post.all_publish(user).sample
+        post.collects.create!(user: user)
+      end
+    end
+    puts "have created fake collects"
+    puts "now you have #{Collect.count} collect data"
   end
 
   task fake_friend: :environment do
