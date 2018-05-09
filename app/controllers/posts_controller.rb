@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :set_post, only: [:show, :edit, :update, :destroy, :collect, :uncollect]
+  before_action :set_category, only: [:show, :edit]
   before_action :authenticate_permit_user, only: [:show]
 
   def index
@@ -10,8 +11,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @categories = Category.all
-    @category = @post.categories.ids
+    set_category
   end
 
   def create
@@ -37,8 +37,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @categories = Category.all
-    @category = @post.categories.ids
     unless @post.user == current_user
       redirect_to user_path(@post.user)
     end
@@ -114,6 +112,11 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :description, :permit, :image)
+  end
+
+  def set_category
+    @categories = Category.all
+    @category = @post.categories.ids
   end
 
   def create_categories
