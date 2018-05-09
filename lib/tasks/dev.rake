@@ -4,7 +4,7 @@ namespace :dev do
     User.destroy_all
     url = "https://uinames.com/api/?ext&region=england"
 
-    20.times do
+    40.times do
       response = RestClient.get(url)
       data = JSON.parse(response.body)
 
@@ -45,45 +45,6 @@ namespace :dev do
     puts "now you have #{Post.count} post data"
   end
 
-  task fake_reply: :environment do
-    User.all.each do |user|
-      3.times do |post|
-        post = Post.all_publish(user).sample
-        post.replies.create!(
-          comment: FFaker::Lorem.sentence(30),
-          user: user,
-          created_at: FFaker::Time::between(Time.new(2018, 04, 01), Time.new(2018, 05, 13))
-        )
-      end
-    end
-    puts "have created fake replies"
-    puts "now you have #{Reply.count} reply data"
-  end
-
-  task fake_viewed: :environment do
-    Post.all.each do |post|   
-      rand(1..5).times do |i|
-        post.vieweds.create!(
-          post: post,
-          user: User.all.sample
-        )
-      end
-    end
-    puts "have created fake vieweds"
-    puts "now you have #{Viewed.count} viewed data"
-  end
-
-  task fake_collect: :environment do
-    User.all.each do |user|
-      3.times do |post|
-        post = Post.all_publish(user).sample
-        post.collects.create!(user: user)
-      end
-    end
-    puts "have created fake collects"
-    puts "now you have #{Collect.count} collect data"
-  end
-
   task fake_friend: :environment do
     Friendship.destroy_all
       User.all.each do |user|   
@@ -97,6 +58,57 @@ namespace :dev do
       end
     puts "have created fake friends"
     puts "now you have #{Friendship.count} friend data"
+  end
+
+  task fake_reply: :environment do
+    Reply.destroy_all
+    User.all.each do |user|
+      30.times do |post|
+        post = Post.all_publish(user).sample
+        post.replies.create!(
+          comment: FFaker::Lorem.sentence(30),
+          user: user,
+          created_at: FFaker::Time::between(Time.new(2018, 04, 01), Time.new(2018, 05, 13))
+        )
+      end
+    end
+    puts "have created fake replies"
+    puts "now you have #{Reply.count} reply data"
+  end
+
+  task fake_viewed: :environment do
+    Viewed.destroy_all
+    Post.all.each do |post|   
+      rand(1..10).times do |i|
+        post.vieweds.create!(
+          post: post,
+          user: User.all.sample
+        )
+      end
+    end
+    puts "have created fake vieweds"
+    puts "now you have #{Viewed.count} viewed data"
+  end
+
+  task fake_collect: :environment do
+    Collect.destroy_all
+    User.all.each do |user|
+      3.times do |post|
+        post = Post.all_publish(user).sample
+        post.collects.create!(user: user)
+      end
+    end
+    puts "have created fake collects"
+    puts "now you have #{Collect.count} collect data"
+  end
+
+  task fake_all: :environment do
+    Rake::Task['dev:fake_user'].execute
+    Rake::Task['dev:fake_post'].execute
+    Rake::Task['dev:fake_friend'].execute
+    Rake::Task['dev:fake_reply'].execute
+    Rake::Task['dev:fake_viewed'].execute
+    Rake::Task['dev:fake_collect'].execute
   end
 
 end

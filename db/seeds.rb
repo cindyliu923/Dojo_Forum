@@ -10,7 +10,8 @@ User.create(
   name: 'Admin',
   email: 'admin@example.com',
   password: '12345678',
-  role: 'admin'
+  role: 'admin',
+  introduction: "Hi! I am Admin #{FFaker::DizzleIpsum::paragraph(10)}"
   )
 puts 'Default admin user created'
 
