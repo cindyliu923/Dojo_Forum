@@ -9,10 +9,4 @@ class ApiController < ActionController::Base
       sign_in(user, store: false) if user
     end
   end
-
-  def permit_user?(user)
-    Post.permit == 'friend' && Post.user.beconnect_friends_ids(Post.user).include?(user.id) ||
-    Post.permit == 'myself' && Post.user == user ||
-    Post.permit == 'all'
-  end
 end
