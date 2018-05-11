@@ -7,6 +7,7 @@ end
 
 gem 'rest-client'
 gem 'ffaker'
+gem 'font-awesome-sass'
 
 # user authentication
 gem 'devise'

@@ -18,9 +18,8 @@
 //= require bootstrap
 $(document).on("turbolinks:load", function() {
   $("tr[data-link]").click(function(event) {
-    if (!$(event.target).is('a')) {
+    if (!($(event.target).is('a') || $(event.target).is('i'))) {
       window.location = $(this).data("link");
-      };
-    });
-
+    };
+  });
 });

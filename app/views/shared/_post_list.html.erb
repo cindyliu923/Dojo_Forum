@@ -6,9 +6,11 @@
         <td><% if post.replies.present? %>
             <%= post.last_replied_at %>
             <% end %></td>
-        <td><%= post.vieweds_count %></td>
+        <td><%= icon('fas', 'eye') %><%= post.vieweds_count %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= paginate @posts %>
+<nav class="container">
+  <%= paginate @posts %>
+</nav>

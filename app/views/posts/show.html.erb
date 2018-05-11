@@ -12,24 +12,24 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-6 col-md-3">
-      <%= link_to user_path(@user) do %>
-        <%= image_tag @user.avatar, class: "user-avatar img-thumbnail" %>
-        <h4 class="text-center"><%= @user.name %></h4>
-      <% end %>
-      <div class="post-add-friend">
+    <div class="col-md-3">
+      <div class="row justify-content-center">
+        <%= link_to user_path(@user) do %>
+          <%= image_tag @user.avatar, class: "user-avatar img-thumbnail" %>
+          <h4 class="text-center"><%= @user.name %></h4>
+        <% end %>
         <%= render partial: "shared/add_friend", locals: {user: @user} %>
       </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-9">
+    <div class="col-12 col-md-9">
       <%= image_tag @post.image, class: "post-image img-thumbnail" %>
       <p><%= @post.description %></p>
       <div class="clearfix">
         <% if @user == current_user || current_user.admin? %>
-          <%= link_to 'delete', post_path(@post), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
+          <%= link_to icon('fas', 'times fa-2x'), post_path(@post), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
         <% end %>
         <% if @user == current_user %>
-          <button type="button" class="btn float-right" data-toggle="modal" data-target=".bd-example-modal-lg">edit</button>                
+          <button type="button" class="btn float-right" data-toggle="modal" data-target=".bd-example-modal-lg"><%= icon('far', 'edit fa-2x') %></button>                
         <% end %>
       </div>
     </div>
@@ -40,13 +40,13 @@
   <div class="row">
     <% @replies.each do |reply| %>
     <div class="col-6 col-md-3">
-      <%= link_to user_path(reply.user) do %>
-        <%= image_tag reply.user.avatar, class: "user-avatar img-thumbnail" %>      
-        <h4 class="text-center"><%= reply.user.name %></h4>
-      <% end %>
-      <div class="post-add-friend">
+      <div class="row justify-content-center">
+        <%= link_to user_path(reply.user) do %>
+          <%= image_tag reply.user.avatar, class: "user-avatar img-thumbnail" %>      
+          <h4 class="text-center"><%= reply.user.name %></h4>
+        <% end %>
         <%= render partial: "shared/add_friend", locals: {user: reply.user} %>
-      </div>    
+      </div>
     </div>
     <div id="<%= reply.id %>" class="col-12 col-sm-6 col-md-9">
       <%= render partial: "replies/reply", :locals => { :reply => reply } %>
@@ -62,7 +62,9 @@
         </div>
       <% end %>
     </div>
-    <%= paginate @replies %>
+    <nav class="container">
+      <%= paginate @replies %>
+    </nav>
   </div>
 </div>
 <!-- Edit modal -->

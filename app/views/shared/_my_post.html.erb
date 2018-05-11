@@ -6,8 +6,9 @@
           <td class="text-center"><%= post.status %>ed</td>
           <td class="text-center"><%= post.created_at.to_date %></td>
           <% if post.user == current_user %>
-            <td><%= link_to "edit", edit_post_path(post) %>
-                <%= link_to 'delete', post_path(post), method: :delete, data: { confirm: "Are you sure?"} %>
+            <td class="text-center">
+              <%= link_to icon('far', 'edit fa-lg'), edit_post_path(post) %>
+              <%= link_to icon('fas', 'times fa-lg'), post_path(post), method: :delete, data: { confirm: "Are you sure?"} %>
             </td>
           <% end %>
           <td></td>

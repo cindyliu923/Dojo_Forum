@@ -7,8 +7,8 @@
           <td class="text-center"><%= draft.status %></td>
           <td class="text-center"><%= draft.created_at.to_date %></td>
           <% if draft.user == current_user %>
-            <td><%= link_to "edit", edit_post_path(draft) %>
-                <%= link_to 'delete', post_path(draft), method: :delete, data: { confirm: "Are you sure?"} %>
+            <td><%= link_to icon('far', 'edit fa-lg'), edit_post_path(draft) %>
+                <%= link_to icon('fas', 'times fa-lg'), post_path(draft), method: :delete, data: { confirm: "Are you sure?"} %>
           <% end %>
           </td>
           <td></td>

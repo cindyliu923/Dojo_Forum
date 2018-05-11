@@ -11,8 +11,8 @@
           </div>
         </div>
         <% if reply.user == current_user %>
-          <%= link_to "Delete", post_reply_path(reply.post, reply), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
-          <%= link_to "Edit", edit_post_reply_path(reply.post, reply), class: "btn float-right", remote: true %>
+          <%= link_to icon('fas', 'times fa-2x'), post_reply_path(reply.post, reply), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
+          <%= link_to icon('far', 'edit fa-2x'), edit_post_reply_path(reply.post, reply), class: "btn float-right", remote: true %>
         <% end %>
       </div>
     </div>

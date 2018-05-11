@@ -6,7 +6,7 @@
       <h4 class="text-center">Waiting for response</h4>
     </div>
     <% @wait_friends.each do |friend| %>
-    <div class="col">
+    <div class="col text-center">
       <%= link_to user_path(friend) do %>
         <%= image_tag friend.avatar, class: "friend-avatar img-thumbnail" %>
         <h5><%= friend.name %></h5>
@@ -23,7 +23,7 @@
     </div>
     <% @unconfirm_friends.each do |friend| %>
     <div id="change-friend-<%= friend.id %>-msg"></div>
-    <div class="col" id="remove-<%= friend.id %>-friend">
+    <div class="col text-center" id="remove-<%= friend.id %>-friend">
       <%= link_to user_path(friend) do %>
         <%= image_tag friend.avatar, class: "friend-avatar img-thumbnail" %>
         <h5><%= friend.name %></h5>
@@ -41,7 +41,7 @@
       <h4 class="text-center">My Friends List</h4>
     </div>
     <% @friends.each do |friend| %>
-    <div class="col">
+    <div class="col text-center">
       <%= link_to user_path(friend) do %>
         <%= image_tag friend.avatar, class: "friend-avatar img-thumbnail" %>
         <h5><%= friend.name %></h5>

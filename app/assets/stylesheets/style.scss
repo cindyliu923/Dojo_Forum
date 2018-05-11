@@ -57,10 +57,52 @@
   margin: -35px 20px 30px 20px;  
 }
 
-.pagination{
-  margin: 0 0px 0px 400px;
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+  justify-content: center;
 }
 
-.post-add-friend{
-  margin: 0 0px 0px 60px;  
+h1,h3,h4{
+  color:#B22222;
 }
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #dc3545ab;
+}
+
+a {
+  color: #E91E63;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
+a:hover {
+  color: #673AB7;
+  text-decoration: underline;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #ff7600d4;
+  border-color: #ffeb00a8;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #e91e63d1;
+  border-color: #FF5722;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #009688;
+  border-color: #8BC34A;
+}
+
