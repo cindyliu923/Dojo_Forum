@@ -63,7 +63,7 @@ namespace :dev do
   task fake_reply: :environment do
     Reply.destroy_all
     User.all.each do |user|
-      30.times do |post|
+      rand(25..30).times do |post|
         post = Post.all_publish(user).sample
         post.replies.create!(
           comment: FFaker::Lorem.sentence(30),
