@@ -19,7 +19,7 @@ class Post < ApplicationRecord
 
   def self.all_publish(user)
     if user.present?
-      where( :status => 'publish').where("permit IS ? AND posts.user_id IS ? OR permit IS ? OR permit IS ? AND posts.user_id IN (?)", 'myself',user,'all','friend',user.beconnect_friends_ids(user))
+      where( :status => 'publish').where('permit = ? AND posts.user_id = ? OR permit = ? OR permit = ? AND posts.user_id IN (?)', 'myself',user,'all','friend',user.beconnect_friends_ids(user))
     else
       where( :status => 'publish', :permit => 'all')
     end
