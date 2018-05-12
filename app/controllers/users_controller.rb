@@ -22,11 +22,11 @@ class UsersController < ApplicationController
   end
 
   def replies
-    @replies = @user.replies
+    @replies = @user.replies.where('post_id IN (?)',@user.replied_posts.all_publish(current_user).ids)
   end
 
   def collects
-    @collects = @user.collects
+    @collects = @user.collects.where('post_id IN (?)',@user.collected_posts.all_publish(current_user).ids)
   end
 
   def friends

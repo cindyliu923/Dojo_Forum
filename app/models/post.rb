@@ -42,7 +42,7 @@ class Post < ApplicationRecord
   end
 
   def permit_user?(user)
-    self.permit == 'friend' && self.user.beconnect_friends_ids(self.user).include?(user.id) ||
+    self.permit == 'friend' && user.beconnect_friends_ids(user).include?(self.user.id) ||
     self.permit == 'myself' && self.user == user ||
     self.permit == 'all'
   end
