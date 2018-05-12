@@ -106,3 +106,20 @@ a:hover {
   border-color: #8BC34A;
 }
 
+span.last-reply{
+  margin: 0px 5px 0px 10px;
+}
+
+span.count-reply{
+  background-color: #ffa5006e;
+  margin: 0px 38px;
+  box-shadow: 1px 1px 3px red;
+  margin-right: 8px;
+  width: 35px;
+  text-align: center;
+  display: block;
+}
+
+span.count-view{
+  margin: 0px 5px 0px 30px;
+}

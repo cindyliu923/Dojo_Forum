@@ -1,12 +1,12 @@
   <tbody class="linkMOUSE"> 
     <% @posts.each do |post| %>   
       <tr data-link="<%= post_path(post) %>">
-        <th scope="row"><%= post.replies_count %></th>
+        <th scope="row"><span class="count-reply"><%= post.replies_count %></span></th>
         <td><%= post.title %></td>
         <td><% if post.replies.present? %>
-            <%= post.last_replied_at %>
+            <span class="last-reply"><%= post.last_replied_at %></span>
             <% end %></td>
-        <td><%= icon('fas', 'eye') %><%= post.vieweds_count %></td>
+        <td><span class="count-view"><%= icon('fas', 'eye') %></span><%= post.vieweds_count %></td>
       </tr>
     <% end %>
   </tbody>
