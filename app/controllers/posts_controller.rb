@@ -47,6 +47,7 @@ class PostsController < ApplicationController
       @post.status = 'publish'
       if @post.update(post_params)
         create_categories
+        flash[:notice] = "post was successfully updated"      
         redirect_to post_path(@post)
       else
         flash.now[:alert] = "post was failed to update"
@@ -55,10 +56,10 @@ class PostsController < ApplicationController
     elsif params[:commit] == "Save Draft"
       if @post.update(post_params)
         create_categories
-        flash[:notice] = "post was successfully updated"      
+        flash[:notice] = "draft was successfully updated"      
         redirect_to drafts_user_path(@post.user)
       else
-        flash.now[:alert] = "post was failed to update"
+        flash.now[:alert] = "draft was failed to update"
         render :edit
       end
     end

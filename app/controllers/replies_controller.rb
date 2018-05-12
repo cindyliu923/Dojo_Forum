@@ -8,17 +8,18 @@ class RepliesController < ApplicationController
     @reply = @post.replies.build(reply_params)
     @reply.user = current_user
     if @reply.save
-      flash[:notice] = "留言成功！"
+      flash[:notice] = "Reply success！"
       redirect_to post_path(@post)
     else
       @post = Post.find(params[:post_id])     
-      flash[:alert] = "留言不可以空白!!"
+      flash[:alert] = "Reply can't be blank!!"
       redirect_to post_path(@post)
     end
   end
 
   def destroy
     @reply.destroy
+    flash[:alert] = "reply was deleted"  
     redirect_back(fallback_location: root_path)
   end
 
