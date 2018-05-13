@@ -81,7 +81,7 @@ class PostsController < ApplicationController
     add_view
     @user = @post.user
     @reply = Reply.new
-    @replies = @post.replies.order(:created_at).page(params[:page]).per(20)
+    @replies = @post.replies.order(:id).page(params[:page]).per(20)
   end
 
   def collect
