@@ -38,7 +38,7 @@ class Post < ApplicationRecord
   end
 
   def last_replied_at
-    self.replies.first.created_at.to_date #因為order DESC
+    self.replies.order(:created_at).last.created_at.to_date 
   end
 
   def permit_user?(user)
