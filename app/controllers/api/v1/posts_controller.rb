@@ -51,6 +51,12 @@ class Api::V1::PostsController < ApiController
   def update
     if @post.user == current_user 
       if @post.update(post_params)
+        if params[:category_ids]
+          @post.categories.destroy_all
+          params[:category_ids].split(",").map(&:to_i).each do |category|
+            CategoryOfPost.create!(category_id: category, post: @post)            
+          end
+        end
         render json: {
           message: "Post updated successfully!",
           result: @post
