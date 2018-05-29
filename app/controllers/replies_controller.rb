@@ -12,7 +12,7 @@ class RepliesController < ApplicationController
       redirect_to post_path(@post)
     else
       @post = Post.find(params[:post_id])     
-      flash[:alert] = "Reply can't be blank!!"
+      flash[:alert] = "Reply can't be blank or too long!!"
       redirect_to post_path(@post)
     end
   end
