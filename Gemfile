@@ -61,6 +61,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'bullet'
   gem 'bundler-audit'
   gem 'brakeman'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
