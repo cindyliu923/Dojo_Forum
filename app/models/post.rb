@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   has_many :category_of_posts, dependent: :destroy
   has_many :categories, through: :category_of_posts
 
-  has_many :replies, dependent: :destroy
+  has_many :replies, -> { order(created_at: :DESC) }, dependent: :destroy
 
   has_many :vieweds, dependent: :destroy
 
@@ -37,8 +37,8 @@ class Post < ApplicationRecord
     self.collected_users.include?(user)
   end
 
-  def last_replied_at
-    self.replies.order(:created_at).last.created_at.to_date 
+  def replied_at
+    self.replies.first.created_at.to_date 
   end
 
   def permit_user?(user)

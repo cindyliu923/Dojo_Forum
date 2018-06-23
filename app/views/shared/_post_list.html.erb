@@ -4,7 +4,7 @@
         <th scope="row"><span class="count-reply"><%= post.replies_count %></span></th>
         <td><%= post.title %></td>
         <td><% if post.replies.present? %>
-            <span class="last-reply"><%= post.last_replied_at %></span>
+            <span class="last-reply"><%= post.replied_at %></span>
             <% end %></td>
         <td><span class="count-view"><%= icon('fas', 'eye') %></span><%= post.vieweds_count %></td>
       </tr>
