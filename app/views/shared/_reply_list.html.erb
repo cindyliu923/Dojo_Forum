@@ -1,0 +1,26 @@
+    <div class="col-6 col-md-3">
+      <div class="row justify-content-center">
+        <%= link_to user_path(reply.user) do %>
+          <%= image_tag reply.user.avatar, class: "user-avatar img-thumbnail" %>      
+          <h4 class="text-center"><%= reply.user.name %></h4>
+        <% end %>
+        <% if reply.user != current_user %>
+          <% if reply.user.add_friend?(current_user) %>
+            <%= link_to 'Cancel friend', friendship_path(reply.user), method: :delete, class: "btn btn-default" %>
+          <% else%>
+            <%= link_to 'Add Friend', friendships_path(friend_id: reply.user), method: :post, class: "btn btn-success", "data-toggle" => "tooltip", "title" => "Add friend?" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div id="<%= reply.id %>" class="col-12 col-sm-6 col-md-9">
+      <div class="card reply-card">
+        <div class="card-body">
+          <%= simple_format reply.comment %>
+        </div>
+      </div>
+        <% if reply.user == current_user %>
+          <%= link_to icon('fas', 'times fa-2x'), post_reply_path(@post, reply), class: "btn float-right", method: :delete, data: { confirm: "Are you sure?"} %>
+          <%= link_to icon('far', 'edit fa-2x'), edit_post_reply_path(@post, reply), class: "btn float-right", remote: true %>
+        <% end %>
+      </div>

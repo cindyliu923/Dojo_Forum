@@ -38,20 +38,7 @@
 <hr>
 <div class="container">
   <div class="row">
-    <% @replies.each do |reply| %>
-    <div class="col-6 col-md-3">
-      <div class="row justify-content-center">
-        <%= link_to user_path(reply.user) do %>
-          <%= image_tag reply.user.avatar, class: "user-avatar img-thumbnail" %>      
-          <h4 class="text-center"><%= reply.user.name %></h4>
-        <% end %>
-        <%= render partial: "shared/add_friend", locals: {user: reply.user} %>
-      </div>
-    </div>
-    <div id="<%= reply.id %>" class="col-12 col-sm-6 col-md-9">
-      <%= render partial: "replies/reply", :locals => { :reply => reply } %>
-    </div>
-    <% end %>
+    <%= render :partial => "shared/reply_list", :collection => @replies, :as => :reply %>
     <div id="replyjump" class="col-md-12">
       <%= form_for [@post, @reply] do |f| %>
         <div class="form-group">
