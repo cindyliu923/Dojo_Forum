@@ -24,6 +24,8 @@ gem 'jquery-rails'
 
 gem 'carrierwave'
 
+gem 'fog-aws'
+
 gem 'kaminari'
 
 # Use Uglifier as compressor for JavaScript assets
